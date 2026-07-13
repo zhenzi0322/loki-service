@@ -28,8 +28,9 @@ jobs:
 
       - name: Clone Codeup private repo
         run: |
-          git clone https://oauth2:${{ secrets.CODEUP_TOKEN }}@codeup.aliyun.com/zheniz0322/Python/packages/loki-service.git
-          cd loki-service
+          git clone https://oauth2:${{ secrets.CODEUP_TOKEN }}@codeup.aliyun.com/zheniz0322/Python/packages/loki-service.git demo
+          cd demo
+          ls ./
 
       - name: Setup Python ${{ matrix.python }}
         uses: actions/setup-python@v5
