@@ -55,6 +55,7 @@ jobs:
 
       # 执行自研构建脚本 --keep-tmp 异常时保留临时目录
       - name: Build protected wheel (keep tmp for debug)
+        working-directory: demo
         run: python -m py2pydso package --package-name loki_service --output-dir wheelhouse --keep-tmp
 
       # 跨平台打印wheel列表
