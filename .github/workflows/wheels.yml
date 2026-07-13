@@ -29,7 +29,6 @@ jobs:
       - name: Clone Codeup private repo
         run: |
           git clone https://oauth2:${{ secrets.CODEUP_TOKEN }}@codeup.aliyun.com/zheniz0322/Python/packages/loki-service.git demo
-          cd demo
           ls ./
 
       - name: Setup Python ${{ matrix.python }}
@@ -51,12 +50,12 @@ jobs:
 
       # Python依赖
       - name: Install build dependencies
-        run: pip install Pillow Cython setuptools wheel mypy requests rfc3339 py2pydso==1.2.0 -i https://pypi.org/simple
+        run: pip install Pillow Cython setuptools wheel mypy requests rfc3339 py2pydso==1.2.3 -i https://pypi.org/simple
 
       # 执行自研构建脚本 --keep-tmp 异常时保留临时目录
       - name: Build protected wheel (keep tmp for debug)
         working-directory: demo
-        run: python -m py2pydso package --package-name loki_service --output-dir wheelhouse --keep-tmp
+        run: python -m py2pydso package --package-name loki_service --output-dir ../wheelhouse --keep-tmp
 
       # 跨平台打印wheel列表
       - name: Print all built wheels in wheelhouse
