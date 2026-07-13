@@ -23,14 +23,15 @@ jobs:
         python: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
 
     steps:
-      - name: Import SSH private key for Codeup
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.CODEUP_TOKEN }}
-
-      - name: Clone Codeup repo via SSH
+      - name: Clone Aliyun Codeup private repo
+        env:
+          # Secrets中存储格式：阿里云登录账号:云效个人访问令牌
+          CODEUP_AUTH: ${{ secrets.CODEUP_CRED }}
+          CODEUP_REPO: https://codeup.aliyun.com/zheniz0322/Python/packages/loki-service.git
         run: |
-          git clone git@codeup.aliyun.com:zheniz0322/Python/packages/loki-service.git .
+          # 带鉴权克隆到子目录，避免根目录文件冲突
+          git clone https://${CODEUP_AUTH}@${CODEUP_REPO#https://} source
+          cd source
 
       - name: Setup Python ${{ matrix.python }}
         uses: actions/setup-python@v5
