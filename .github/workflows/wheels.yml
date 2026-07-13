@@ -26,7 +26,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          repository: zhenzi0322/loki-service-private
+          repository: git@codeup.aliyun.com:zheniz0322/Python/packages/loki-service.git
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
 
       - name: Setup Python ${{ matrix.python }}
