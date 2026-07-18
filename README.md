@@ -1,11 +1,13 @@
-loki-service
-============
 
-[![PyPI version](https://img.shields.io/pypi/v/loki-service.svg)](https://pypi.org/project/loki-service/)
-[![Python version](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/pypi/l/loki-service.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <h1>loki-service</h1>
+  <a href="https://pypi.org/project/loki-service/"><img src="https://img.shields.io/pypi/v/loki-service.svg" alt="PyPI version"></a>
+  <a href="https://pypi.org/project/loki-service/"><img src="https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white" alt="Python"></a>
+  <a href="https://github.com/zhenzi0322/maillite/blob/main/LICENSE"><img src="https://img.shields.io/pypi/l/loki-service.svg" alt="License"></a>
+    <a href="https://tool.long920.cn/loki-service/"><img src="https://app.readthedocs.org/projects/zhenzi0322-tool/badge/?version=latest" alt="Documentation Status"></a>
+</p>
 
-Python logging handler for [Grafana Loki](https://grafana.com/loki)，支持自定义 HTTP Headers、Basic 认证、异步队列、结构化日志。
+> Python logging handler for [Grafana Loki](https://grafana.com/loki)，支持自定义 HTTP Headers、Basic 认证、异步队列、结构化日志。
 
 ## 特性
 
@@ -27,7 +29,7 @@ pip install loki-service
 
 ### LokiLogger（推荐）
 
-开箱即用的生产级 Logger，内置异步队列 + 控制台输出：
+开箱即用的生产级`Logger`，内置异步队列 + 控制台输出：
 
 ```python
 from loki_service import LokiLogger
@@ -99,7 +101,7 @@ logger.error("订单失败", order_id="ORD-001", cost=3200)
 
 | 参数 | 类型 | 默认值 | 说明 |
 |---|---|---|---|
-| `app_name` | `str` | 必填 | 应用名称，作为 Loki 标签 `app` |
+| `app_name` | `str` | 必填 | 应用名称，作为 `Loki` 标签 `app` |
 | `loki_url` | `str` / `None` | `None` | Loki push API 地址；传 `None` 时仅作为本地日志使用，不启动`Loki`推送 |
 | `level` | `str` / `int` | `"DEBUG"` | 日志级别，支持字符串（大小写不敏感）或 `logging.DEBUG` 等整数；无效字符串回退到 `DEBUG` |
 | `env` | `str` | `"dev"` | 环境标识，作为 Loki 标签 `env` |
@@ -288,7 +290,4 @@ curl -X POST http://loki:3100/loki/api/v1/push \
 - **自动 flush**：进程退出时通过 `atexit` 自动停止所有 `QueueListener`，确保队列中剩余日志发送完毕。
 - **重复初始化**：相同 `app_name` 重复创建 `LokiLogger` 时，新参数不生效，请注意避免。
 
-## 许可证
-
-[MIT License](https://opensource.org/licenses/MIT)
 
